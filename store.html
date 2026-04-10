@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Harini's Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+
+<body>
+
+<header>
+    <h1 class="logo">Harini's Store</h1>
+    <nav>  
+        <a href="index.html">Home</a>
+        <a href="cart.html">Cart</a>
+        <a href="tracking.html">Track Order</a>
+    </nav>
+</header>
+
+<section class="products">
+    <h2>Books</h2>
+
+    <div class="products-container">
+
+        <div class="product-card">
+            <h3>The Silent Code</h3>
+            <p>A tech-based thriller novel inspired by real incidents.</p>
+            <p class="price">₹599</p>
+            <button onclick="addToCart('The Silent Code', 599)">Add To Cart</button>
+        </div>
+
+        <div class="product-card">
+            <h3>The Whispers Beyond The Neon Sky</h3>
+            <p>A story showcasing the emotional world of a child in a tech-driven society.</p>
+            <p class="price">₹599</p>
+            <button onclick="addToCart('The Whispers Beyond The Neon Sky', 599)">Add To Cart</button>
+        </div>
+
+        <div class="product-card">
+            <h3>Echoes Of a Paper Moon</h3>
+            <p>A boy follows mysterious paper moons to a forgotten world.</p>
+            <p class="price">₹599</p>
+            <button onclick="addToCart('Echoes Of a Paper Moon', 599)">Add To Cart</button>
+        </div>
+
+        <div class="product-card">
+            <h3>The Girl Who Collected Thunder</h3>
+            <p>A brave girl uses the power of thunder to protect her village.</p>
+            <p class="price">₹599</p>
+            <button onclick="addToCart('The Girl Who Collected Thunder', 599)">Add To Cart</button>
+        </div>
+
+        <div class="product-card">
+            <h3>Midnight Library of Lost Maps</h3>
+            <p>A magical library that opens at midnight with maps to hidden worlds.</p>
+            <p class="price">₹599</p>
+            <button onclick="addToCart('Midnight Library of Lost Maps', 599)">Add To Cart</button>
+        </div>
+
+        <div class="product-card">
+            <h3>When Stars Forgot Their Names</h3>
+            <p>A young astronomer helps the stars regain their identity.</p>
+            <p class="price">₹599</p>
+            <button onclick="addToCart('When Stars Forgot Their Names', 599)">Add To Cart</button>
+        </div>
+
+        <div class="product-card">
+            <h3>The Boy Who Borrowed Time</h3>
+            <p>A student discovers the consequences of controlling time.</p>
+            <p class="price">₹599</p>
+            <button onclick="addToCart('The Boy Who Borrowed Time', 599)">Add To Cart</button>
+        </div>
+
+        <div class="product-card">
+            <h3>A Garden That Grew in Winter</h3>
+            <p>A magical garden blooms in winter and changes lives.</p>
+            <p class="price">₹599</p>
+            <button onclick="addToCart('A Garden That Grew in Winter', 599)">Add To Cart</button>
+        </div>
+
+    </div>
+</section>
+
+<script>
+
+function addToCart(productName, price) {
+
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    let existingItem = cart.find(item => item.name === productName);
+
+    if (existingItem) {
+        existingItem.quantity = (existingItem.quantity || 1) + 1;
+    } else {
+        cart.push({
+            name: productName,
+            price: price,
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert("Added to cart 🛒");
+}
+
+</script>
+
+</body>
+</html>

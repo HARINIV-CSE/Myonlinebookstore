@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Track Order</title>
+    <link rel="stylesheet" href="styles.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+</head>
+
+<body>
+
+<header>
+    <h3 class="logo">Track Your Order</h3>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="store.html">Store</a></li>
+            <li><a href="cart.html">Cart</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section class="tracking-container">
+
+    <div class="tracking-search">
+        <h2>Enter Your Email</h2>
+        <input type="email" id="trackEmail" placeholder="Enter your registered email" required>
+        <button onclick="trackOrder()">Track Order</button>
+    </div>
+
+    <div class="order-details" id="orderDetails" style="display:none;">
+        <h2>Order Details</h2>
+
+        <p><strong>Order ID:</strong> <span id="displayOrderId"></span></p>
+        <p><strong>Email:</strong> <span id="displayEmail"></span></p>
+        <p><strong>Address:</strong> <span id="displayAddress"></span></p>
+
+        <h3>Status:</h3>
+        <p id="displayStatus"></p>
+    </div>
+
+    <div id="noOrder" style="display:none;">
+        <p style="color:red;">No order found for this email.</p>
+    </div>
+
+</section>
+
+<script>
+
+function trackOrder() {
+
+    let email = document.getElementById("trackEmail").value.trim();
+    let found = false;
+
+    for (let i = 0; i < localStorage.length; i++) {
+
+        let key = localStorage.key(i);
+
+        if (key.startsWith("order_")) {
+
+            let order = JSON.parse(localStorage.getItem(key));
+
+            if (order.email === email) {
+
+                document.getElementById("displayOrderId").innerText = order.orderId;
+                document.getElementById("displayEmail").innerText = order.email;
+                document.getElementById("displayAddress").innerText = order.address;
+                document.getElementById("displayStatus").innerText = order.status;
+
+                document.getElementById("orderDetails").style.display = "block";
+                document.getElementById("noOrder").style.display = "none";
+
+                found = true;
+                break;
+            }
+        }
+    }
+
+    if (!found) {
+        document.getElementById("orderDetails").style.display = "none";
+        document.getElementById("noOrder").style.display = "block";
+    }
+}
+
+</script>
+
+</body>
+</html>
